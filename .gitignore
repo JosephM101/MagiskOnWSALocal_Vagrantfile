@@ -1,3 +1,4 @@
 out/
 .vagrant
 vagrant-config.json
+vagrant_config.json
