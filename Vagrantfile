@@ -1,3 +1,4 @@
+require 'json'
 Dir.mkdir("out") unless Dir.exist?("out")
 
 Vagrant.configure("2") do |config|
@@ -6,10 +7,8 @@ Vagrant.configure("2") do |config|
   
   config.vm.provider "virtualbox" do |vb|
     vb.memory = "2048"
-    vb.cpus = 8  # Good for compression purposes
+    vb.cpus = File.exist?("vagrant_config.json") ? JSON.parse(File.read("vagrant_config.json", encoding: 'bom|utf-8'))["cpu_cores"].to_i : 4
   end
-  
-  # config.vm.synced_folder "out", "/wsa_out"
   
   config.vm.provision "shell", inline: <<-SHELL
     WSA_ARGS="--arch x64 --release-type WIF --root-sol magisk --magisk-ver stable  --gapps-brand MindTheGapps --gapps-variant pico --remove-amazon"
