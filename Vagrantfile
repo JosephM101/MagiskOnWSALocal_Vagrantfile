@@ -11,8 +11,9 @@ Vagrant.configure("2") do |config|
   end
   
   config.vm.provision "shell", inline: <<-SHELL
-    WSA_ARGS="--arch x64 --release-type WIF --root-sol magisk --magisk-ver stable  --gapps-brand MindTheGapps --gapps-variant pico --remove-amazon"
-    WSA_COMPRESSION_SETTINGS="--compress --compress-format zip"
+    # WSA_ARGS="--arch x64 --release-type Insider Private --root-sol magisk --magisk-ver stable --gapps-brand MindTheGapps --gapps-variant pico --remove-amazon"
+    WSA_ARGS="--arch x64 --release-type latest --root-sol magisk --magisk-ver stable --gapps-brand MindTheGapps --remove-amazon --custom-model cheetah"
+    WSA_COMPRESSION_SETTINGS="--compress-format zip"
     OUTPUT_DIR="/vagrant/out"
 
     # sudo add-apt-repository ppa:deadsnakes/ppa
@@ -24,8 +25,8 @@ Vagrant.configure("2") do |config|
     sudo apt-get install -y lzip patchelf e2fsprogs python3 python3-pip aria2 p7zip-full attr unzip whiptail qemu-utils -y
     sudo apt-get clean
     
-    git clone https://github.com/LSPosed/MagiskOnWSALocal.git
-    cd MagiskOnWSALocal
+    # git clone https://github.com/LSPosed/MagiskOnWSALocal.git && cd MagiskOnWSALocal
+    git clone https://github.com/YT-Advanced/WSA-Script && cd WSA-Script
 
     python3 -m pip install requests pyyaml
 
